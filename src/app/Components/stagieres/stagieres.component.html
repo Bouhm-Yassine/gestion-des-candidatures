@@ -1,0 +1,114 @@
+<p></p>
+<div *ngIf=" stagieres.length>0 ;
+      else noStg">
+  <div class="bg-info text-white" style="padding: 10px;  align-items: center;">
+    <h4 style="text-align: center;" >List Des Stagieres</h4>
+  </div>
+  <p></p>
+  <p></p>
+  <div class="row">
+    <div class="col-lg-2">
+        <button  (click)="onShowNormale()" class="btn btn-success"  style="width: 100%">
+          <h6 style="margin: 5px; font-size: 18px;">Tout Stagieres</h6>
+        </button>
+    </div>
+    <div class="col-lg-2">
+      <button (click)="onShowValide()" class="btn btn-success"  style="width: 100%">
+        <h6 style="margin: 5px; font-size: 18px;">Confirmés</h6>
+      </button>
+    </div>
+    <div class="col-lg-2">
+        <button (click)="onShowNonValide()" class="btn btn-success"  style="width: 100%">
+          <h6 style="margin: 5px; font-size: 18px;">Non Confirmés</h6>
+        </button>
+    </div>
+    <div class="col-lg-1"></div>
+    <div class="col-lg-5">
+            <div class="form-group form-inline row">
+              <label for="search" class="col-lg-3" ><h6 style="font-size: 25px;">Search:</h6></label>
+              <div class="col-lg-9">
+                  <input style="width: 90%" id="search" class="form-control" type="text" placeholder="Search by name"  
+                  [(ngModel)]="searchTerm"/>
+              </div>
+            </div>
+    </div>
+  </div>
+  <p></p><p></p>
+  
+<table class="table">
+    <thead>
+    <tr style="align-items:center">
+      <th>Nom Complet</th>
+      <th>Num Phone</th>
+      <th>Email</th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngIf="isShowValide === true">
+    <ng-container *ngFor="let stagiere of stagieres  | stagiereFilter:searchTerm | paginate: { itemsPerPage: count, currentPage: p }">
+    <tr *ngIf="stagiere.status == 'true' ">
+      <td>{{stagiere.NomComplet}}</td>
+      <td>{{stagiere.PhoneNumber}}</td>
+      <td>{{stagiere.Email}}</td>
+      <td>
+        <button (click)="onViewStagiere(stagiere.id)" class="btn btn-outline-primary">Details</button>&nbsp;
+        <button (click)="onDeleteStagiere(stagiere.id,stagiere.CV,stagiere.LM)" class="btn btn-outline-danger">Delete</button>
+      </td>
+      <td [ngClass]="{ 'btn-success': stagiere.status == 'true',
+      'btn-warning': stagiere.status == 'false'
+    }" style="width: 1px;">
+      </td>
+    </tr>
+  </ng-container>
+</ng-container> 
+<ng-container *ngIf="isShowNonValide === true">
+    <ng-container *ngFor="let stagiere of stagieres  | stagiereFilter:searchTerm | paginate: { itemsPerPage: count, currentPage: p }">
+    <tr *ngIf="stagiere.status == 'false' ">
+      <td>{{stagiere.NomComplet}}</td>
+      <td>{{stagiere.PhoneNumber}}</td>
+      <td>{{stagiere.Email}}</td>
+      <td>
+        <button (click)="onViewStagiere(stagiere.id)" class="btn btn-outline-primary">Details</button>&nbsp;
+        <button (click)="onDeleteStagiere(stagiere.id,stagiere.CV,stagiere.LM)" class="btn btn-outline-danger">Delete</button>
+      </td>
+      <td [ngClass]="{ 'btn-success': stagiere.status == 'true',
+      'btn-warning': stagiere.status == 'false'
+    }" style="width: 1px;">
+      </td>
+    </tr>
+  </ng-container>
+</ng-container>
+<ng-container *ngIf="isShowNormale === true">  
+    <ng-container *ngFor="let stagiere of stagieres  | stagiereFilter:searchTerm | paginate: { itemsPerPage: count, currentPage: p }">
+    <tr>
+      <td>{{stagiere.NomComplet}}</td>
+      <td>{{stagiere.PhoneNumber}}</td>
+      <td>{{stagiere.Email}}</td>
+      <td>
+        <button (click)="onViewStagiere(stagiere.id)" class="btn btn-outline-primary">Details</button>&nbsp;
+        <button (click)="onDeleteStagiere(stagiere.id,stagiere.CV,stagiere.LM)" class="btn btn-outline-danger">Delete</button>
+      </td>
+      <td [ngClass]="{ 'btn-success': stagiere.status == 'true',
+                       'btn-warning': stagiere.status == 'false'
+                     }" style="width: 1px;">
+      </td>
+    </tr>
+  </ng-container>
+</ng-container> 
+    </tbody>
+  </table>
+<div class="text-right">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>
+
+<ng-template #noStg>
+  <div class="bg-info text-white" style="padding: 10px;  align-items: center;">
+    <h4 style="text-align: center;" >List Des Stagieres Est Vide</h4>
+  </div>
+</ng-template>
+<p></p>
+<!--<button class="btn btn-outline-dark" (click)="onBack()">Retour</button>
+-->

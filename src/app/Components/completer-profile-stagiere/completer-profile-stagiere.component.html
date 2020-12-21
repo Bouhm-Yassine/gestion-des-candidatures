@@ -1,0 +1,61 @@
+<div>
+  <div class="card">
+    <div class="card-header bg-info text-white" style="height: 80px; font-size: 40px; padding-bottom: 20px; text-align: center;">Completer Votre Profile</div>
+    <div class="card-body">
+    <div class="card">
+        <div class="card-header"><h3>Ajouter Votre Diplomes</h3></div>
+        <div class="card-body">
+            <form [formGroup]="CompleterProfileForm" (ngSubmit)="CompleterProfileStagiere()">
+                <div class="form-group row">
+                <div class="col-lg-6">
+                  <div class="custom-file">
+                      <input type="file"  (change)="detectFilesCinAvant($event)" type="file" id="cinAvant" formControlName="cinAvant" class="form-control custom-file-input">
+                      <label class="custom-file-label" for="cinAvant">Cin Avant</label>
+                  </div>
+                  <p class="text-success" *ngIf="fileUploadedCinAvant">Fichier chargé !</p>
+                </div>
+                <div class="col-lg-6">
+                  <div class="custom-file">
+                      <input type="file"  (change)="detectFilesCinArriere($event)" type="file" id="cinArriere" formControlName="cinArriere" class="form-control custom-file-input">
+                      <label class="custom-file-label" for="cinArriere">Cin Arriere</label>
+                  </div>
+                  <p class="text-success" *ngIf="fileUploadedCinArriere">Fichier chargé !</p>
+                </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-12">
+                  <div class="custom-file">
+                          <input type="file"  (change)="detectFilesDiplome1($event)" type="file" id="diplome1" formControlName="diplome1" class="form-control custom-file-input">
+                          <label class="custom-file-label" for="diplome1">Diplome 1</label>
+                  </div>
+                  <p class="text-success" *ngIf="fileUploadedDiplome1">Fichier chargé !</p>
+            </div>
+          </div>
+          <p></p>
+          <div class="row">
+                <div class="col-lg-12">
+                  <div class="custom-file">
+                          <input type="file"  (change)="detectFilesDiplome2($event)" type="file" id="diplome2" formControlName="diplome2" class="form-control custom-file-input">
+                          <label class="custom-file-label" for="diplome2">Diplome 2</label>
+                  </div>
+                  <p class="text-success" *ngIf="fileUploadedDiplome2">Fichier chargé !</p>
+                </div>
+          </div>
+          <p></p>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="row">
+                <div class="col-lg-7" >
+                        <button style="width: 100%" [disabled]="CompleterProfileForm.invalid || fileIsUploadingCinAvant  || fileIsUploadingCinArriere || fileIsUploadingDiplome1 || fileIsUploadingDiplome2 "  type="submit" class="btn btn-info">Valider</button>
+                </div>
+          </div>
+            </div>
+            <div class="col-lg-6"></div>      
+          </div>
+        </form>
+        </div>
+    </div>
+    </div>
+    
+</div>
+</div>

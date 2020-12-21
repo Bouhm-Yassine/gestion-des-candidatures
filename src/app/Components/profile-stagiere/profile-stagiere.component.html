@@ -1,0 +1,190 @@
+<p></p>
+<div class="row" style="height: 100%">
+  <div class="col-lg-10">
+    <!--Information Personnelle-->
+      <div *ngIf="isProfile === true">
+          <div class="card">
+            <div class="card-header bg-info text-white" style="height: 80px; font-size: 40px; padding-bottom: 20px; text-align: center;">Profile Stagiere</div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <h1>{{myData.NomComplet}}</h1>
+                  <h5>Periode de stage: {{myData.Periode}}</h5>
+                  <p style="font-size: 20px;">{{myData.Presentation}}</p>
+                </div>
+                <div class="col-lg-6">
+                  <div class="row">
+                    <div class="col-lg-3"><h4>Email:</h4></div>
+                    <div class="col-lg-9"><h5>{{myData.Email}}</h5></div>
+                  </div>
+                  <p>
+                  </p>
+                  <div class="row">
+                    <div class="col-lg-3"><h4>Phone:</h4></div>
+                    <div class="col-lg-9"><h5>{{myData.PhoneNumber}}</h5></div>
+                  </div>
+                  <p></p>
+                  <div>
+                    <div class="row">
+                      <div class="col-lg-3"><h4>CV:</h4></div>
+                      <div class="col-lg-9">
+                        <a class="btn btn-outline-success" [href]="myData.CV" target="_blank">Aperçu</a>
+                      </div>
+                    </div>
+                    <p></p>
+                    <div class="row">
+                      <div class="col-lg-3"><h4>LM:</h4></div>
+                      <div class="col-lg-9">
+                        <a class="btn btn-outline-success" [href]="myData.LM" target="_blank">Aperçu</a>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12" *ngFor="let myDiplomes of myDataDiplome">
+                        <div *ngIf="myDiplomes.status === 'false'">
+                            <p></p><p></p>
+                            <div class="card">
+                              <div class="card-header bg-info">
+                            <h4 class="text-center text-white">Diplomes</h4>
+                          </div>
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-lg-6">
+                                  <div class="row">
+                                      <div class="col-lg-6"><h3>CIN Avant:</h3></div>
+                                      <a class="btn btn-outline-success" [href]="myDiplomes.cinAvant" target="_blank">Aperçu</a>
+                                    </div>
+                              </div>
+                              <div class="col-lg-6">
+                                  <div class="row">
+                                      <div class="col-lg-6"><h3>CIN Arriere:</h3></div>
+                                      <a class="btn btn-outline-success" [href]="myDiplomes.cinArriere" target="_blank">Aperçu</a>
+                                    </div>
+                              </div>
+                            </div>
+                            <p></p><p></p>
+                            <div class="row">
+                                <div class="col-lg-6"><div class="row">
+                                    <div class="col-lg-6"><h3>Diplome 1:</h3></div>
+                                    <a class="btn btn-outline-success" [href]="myDiplomes.diplome1" target="_blank">Aperçu</a>
+                                  </div></div>
+                                <div class="col-lg-6"><div class="row">
+                                    <div class="col-lg-6"><h3>Diplome 2:</h3></div>
+                                    <a class="btn btn-outline-success" [href]="myDiplomes.diplome2" target="_blank">Aperçu</a>
+                                  </div></div>
+                              </div>
+                          </div>
+                          </div>
+                        </div>
+                    </div>
+              </div>
+              
+              </div>
+              
+          </div>
+        </div>
+    <!--Changer Password-->
+    <div *ngIf="isChangerPassword === true">
+        <div class="card">
+          <div class="card-header bg-info text-white" style="height: 80px; font-size: 40px; padding-bottom: 20px; text-align: center;">Changer Password</div>
+          <div class="card-body">
+              <div class="row">
+                  <div class="col-lg-12">
+                      <h4>Pour changer votre mot de pass cliquant sur ce button ci dessous</h4>
+                      <p>Un mail sera envoyer au votre boite mail</p>
+                  </div>
+              </div>
+              <p></p><p></p>
+                <div class="row">
+                  <div class="col-lg-12">
+                      <button style="width: 40%" class="btn btn-outline-info text-center" (click)="resetPassword(myData.Email)">Reset Password</button> 
+                  </div>
+                </div>
+          </div>
+            
+        </div>
+    </div>
+    <!--Attestation-->
+    <div *ngIf="isAttestation === true">
+        <div class="card">
+          <div class="card-header bg-info text-white" style="height: 80px; font-size: 40px; padding-bottom: 20px; text-align: center;">Attestation</div>
+          <div class="card-body">
+            <div *ngFor="let AttestationStatus of myDataAttestationStatus">
+            <div *ngIf="AttestationStatus.status === 'false'">
+              <div class="row">
+                <div class="col-lg-12">
+                    <h4>Vous demanderez l'attestation de stage en cliquant sur ce button ci dessous</h4>
+                </div>
+            </div>
+            <p></p><p></p>
+              <div class="row">
+                <div class="col-lg-12">
+                    <button style="width: 40%" (click)="OnDemandeAttestation()" class="btn btn-outline-info text-center">Demander Attestation</button>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="AttestationStatus.status === 'true' && AttestationStatus.statusDelivration === 'false'">
+                <div class="alert-danger" style="height: 100%; margin: 40px; padding:10%;">
+                    <h2 class="text-center">Votre demande a été envoyée avec success</h2>
+              </div>
+            </div>
+            <div *ngIf="AttestationStatus.statusDelivration === 'true' && AttestationStatus.status === 'true'">
+                <div class="alert-success" style="height: 100%; margin: 40px; padding:10%;">
+                    <h2 class="text-center">L'attestation de stage a été delivrée</h2>
+              </div>
+            </div>
+          </div>
+          </div>
+            
+        </div>
+    </div>
+    <!--Completer Profile-->
+    <div>
+      <div *ngFor="let myDiplomes of myDataDiplome">
+    <div *ngIf="isCompleterProfile === true && myDiplomes.status === 'true' ">
+        <app-completer-profile-stagiere></app-completer-profile-stagiere>
+    </div>
+    <div *ngIf="isCompleterProfile === true && myDiplomes.status === 'false' ">
+        <div class="card">
+            <div class="card-header bg-info text-white" style="height: 80px; font-size: 40px; padding-bottom: 20px; text-align: center;">Completer Votre Profile</div>
+            <div class="card-body">
+              <div class="alert-danger" style="height: 100%; margin: 40px; padding:10%;">
+                    <h2 class="text-center">Votre Profile A Deja Completé</h2>
+              </div>
+            </div>  
+        </div>  
+    </div>
+  </div>
+</div>
+  </div>
+  
+  <div class="col-lg-2 bg-info">
+    <p></p>
+    <div class="row">
+            <div ngbDropdown class="col-lg-12 d-inline-block">
+              <button  class="btn MonButton" style="width: 100%" id="MonCompteDropDown" ngbDropdownToggle>Mon Compte</button>
+              <div ngbDropdownMenu aria-labelledby="MonCompteDropDown">
+                <button ngbDropdownItem (click)="onGoProfile()">Mon Profile</button>
+                <button ngbDropdownItem (click)="onGoCompleterProfileStagiere()">Completer Votre Profile</button>
+                <button ngbDropdownItem (click)="onGoChangerPassword()">Changer Password</button>
+              </div>
+            </div>
+    </div>
+    <p></p>
+    <div class="row">
+        <div class="col-lg-12">
+              <button (click)="onGoAttestation()" style="width: 100%" class="btn MonButton" id="dropdownBasic1">Attestation</button>
+        </div>      
+    </div>
+    <p></p>
+    <div class="row">
+        <div class="col-lg-12">
+            <button style="width: 100%" class="btn MonButton" (click)=" onLogOut()">Log Out</button>
+        </div>      
+    </div>
+  </div>
+</div>
+

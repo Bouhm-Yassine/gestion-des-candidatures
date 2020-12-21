@@ -1,0 +1,105 @@
+<p></p>
+<p></p>
+<div *ngIf="isValider === true" style="margin:20px;">
+    <div class="bg-info text-white" style="font-size: 70px; text-align:center;">Candidature</div>
+    <div style="margin-top: 20px;margin-left: 20px; margin-bottom: 40px;">
+        <p style="font-size:15px;">
+                Si vous souhaitez développer vos compétences, venez partager une expérience digitale avec 
+                notre agence web. N’hésitez pas à faire une candidature spontanée et à déposer votre CV en 2 minutes. 
+                Nous étudierons celui-ci et il pourra être conservé pour une opportunité à venir.
+        </p>
+    </div>
+    <div style="margin:40px;">
+    <form [formGroup]="candidatureForm" (ngSubmit)="addStagiere()">
+      <div class="form-group row">
+        <div class="col-lg-6">
+          <div class="row">
+            <label for="nom" class="col-lg-2 col-form-label">Nom</label>
+            <div class="col-lg-10">
+              <input  type="text" formControlName="nomcomplet"
+                      id="nom" class="form-control"
+                      placeholder="Nom Complet">
+            </div>
+          </div>
+        </div>
+        <div  class="col-lg-6">
+          <div class="row">
+            <label for="periode" class="col-lg-2 col-form-label">Periode</label>
+            <div class="col-lg-10">
+              <input  type="text" formControlName="periode"
+                      id="periode" class="form-control"
+                      placeholder="en mois ">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-lg-6">
+          <div class="row">
+            <label for="email" class="col-lg-2 col-form-label">Email</label>
+            <div class="col-lg-10">
+              <input type="email" id="email" formControlName="email" class="form-control" placeholder="Email">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="row">
+            <label for="tlf" class="col-lg-2 col-form-label">Phone</label>
+            <div class="col-lg-10">
+              <input type="text" id="tlf" formControlName="tlf" class="form-control" placeholder="Numéro de telephone">
+              <small class=" form-text text-muted" id="phoneHelp">Ex: 06 11 22 33 44</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-form-label">Présenter vous</label>
+        <textarea formControlName="presentation" id="presentation" class="form-control" placeholder="Courte présentation ..." rows="2"></textarea>
+      <div *ngIf="candidatureForm.controls['presentation'].hasError('maxlength')"> 
+        <p class="text-danger">you can enter only 150 characters</p>
+      </div>
+      </div>
+      <div class="form-group">
+        <div class="card">
+          <div class="card-header">Ajouter Des Fichiers</div>
+          <div class="card-body">
+
+         <div class="form-group row">
+              <div class="col-lg-6">
+                <div class="custom-file">
+                  <input type="file"  (change)="detectFilesCV($event)" type="file" id="cv" formControlName="cv" class="form-control custom-file-input">
+                  <label class="custom-file-label" for="cv">CV</label>
+                </div>
+                <p class="text-success" *ngIf="fileUploadedCV">Fichier chargé !</p>
+              </div>
+              <div class="col-lg-6">
+                <div class="custom-file">
+                  <input type="file" (change)="detectFilesLM($event)" type="file" id="lm" formControlName="lm" class="form-control custom-file-input">
+                  <label class="custom-file-label" for="lm">Lettre Motivation</label>
+                </div>
+                <p class="text-success" *ngIf="fileUploadedLM">Fichier chargé !</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-2">
+            <button style="width: 100%" [disabled]="candidatureForm.invalid || fileIsUploadingCV || fileIsUploadingLM "  type="submit" class="btn btn-info">Valider</button>
+        </div>
+      </div>
+      
+    </form>
+  </div>
+  
+</div>
+<div *ngIf="isValider === false">
+  <div class="bg-info text-white" style="align-items: center; height:180px;">
+    <h4 style="text-align: center; font-size: 45px; padding: 50px;" >Votre Candidature A Ete Bien Envoyée</h4>
+  </div>
+  <p></p>
+  <button class="btn btn-outline-dark" routerLink="/home">Retour</button>
+</div>
+

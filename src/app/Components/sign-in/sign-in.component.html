@@ -1,0 +1,48 @@
+<p></p>
+<p></p>
+<div class="container">
+        <div class="row">
+          <div class="offset-lg-3 col-lg-6 offset-lg-3">          
+            <div class="card" style="margin:25px">
+              <div class="card-header bg-info text-white" style="text-align: center"><h2 class="text-center">Sign In</h2></div>
+              <div class="card-body">
+                <form style="margin-left: 45px; margin-right: 45px; margin-top: 15px; margin-bottom: 15px"
+                      [formGroup]="signInForm" (ngSubmit)="OnLogin()">
+                  <div class="form-group">
+                    <div>
+                      <input type="text" id="email" [(ngModel)]="Myemail" formControlName="email" class="form-control" placeholder="Email">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div>
+                      <input type="password" id="password" formControlName="password" class="form-control" placeholder="PassWord">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <button style="width:100%" [disabled]="signInForm.invalid" type="submit" class="btn btn-info">Sign in</button>
+                      </div>
+                      <div class="col-lg-6">
+                        <button style="width:100%" routerLink="/home" class="btn btn-outline-info">Retour</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <h5 class="text-info">
+                      <a class="nav-link" (click)="onForGotPassWord()" style="cursor: pointer">
+                          Mot de passe oublié ?
+                      </a>
+                    </h5>
+                  </div>
+                </form>
+                <div>
+              </div>
+                  <p></p>
+                <p class="text-danger" style="font-size:15px">{{ MessagError }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      

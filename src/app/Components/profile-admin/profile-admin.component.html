@@ -1,0 +1,21 @@
+<p></p>
+<p></p>
+<p></p>
+<div>
+  <div>
+    <button class="btn btn-outline-info"  (click)="onGoAdmin()">MyAdmin</button>&nbsp;
+    <button class="btn btn-info"  (click)="onGoEmployee()">Employee</button>&nbsp;
+    <button class="btn btn-info"  (click)="onGoStagiere()">Stagiere</button>
+  </div>
+  <p></p>
+  <p></p>
+  <div *ngIf="isAdmin === true">
+      <app-mon-admin></app-mon-admin>
+    </div>
+  <div *ngIf="isStagiere === true">
+    <app-stagieres></app-stagieres>
+  </div>
+  <div *ngIf="isEmployee === true">
+  <app-employee></app-employee>
+  </div>
+</div>

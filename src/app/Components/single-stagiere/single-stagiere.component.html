@@ -1,0 +1,141 @@
+<p></p>
+<div>
+  <div class="card">
+    <div class="card-header bg-info text-white" style="height: 80px; font-size: 40px; padding-bottom: 20px; text-align: center;">Information Personnelle</div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-6">
+          <h1>{{myData.NomComplet}}</h1>
+          <h5>Periode de stage: {{myData.Periode}}</h5>
+          <p style="font-size: 20px;">{{myData.Presentation}}</p>
+          <p></p>
+          <p></p>
+          <div *ngFor="let AttestationStatus of myDataAttestationStatus">
+              <p></p>
+              <p></p>
+              <br>
+          <div *ngIf="AttestationStatus.status === 'true' && AttestationStatus.statusDelivration === 'false'">
+              <div class="alert-danger" style="padding: 3%;">
+              <h4 class="text-center">Le stagiere a demandé une attestation de stage</h4>
+              </div>
+              <p></p>
+              <button class="btn btn-danger" (click)="onDilivrerAttestation()">Dilivrer</button>
+          </div>
+          <div *ngIf="AttestationStatus.status === 'false'">
+              <div class="alert-danger" style="margin: 10px; padding: 3%;">
+                 <h4 class="text-center">Le stagiere n'a pas encore demandé une attestation de stage</h4>
+              </div>
+            </div>
+          <div *ngIf="AttestationStatus.statusDelivration === 'true'">
+              <div class="alert-success" style="margin: 10px; padding: 3%;">
+                 <h4 class="text-center">L'attestation de stage a été delivrée</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="row">
+            <div class="col-lg-3"><h4>Email:</h4></div>
+            <div class="col-lg-9"><h5>{{myData.Email}}</h5></div>
+          </div>
+          <p>
+          </p>
+          <div class="row">
+            <div class="col-lg-3"><h4>Phone:</h4></div>
+            <div class="col-lg-9"><h5>{{myData.PhoneNumber}}</h5></div>
+          </div>
+          <p></p>
+          <div>
+            <div class="row">
+              <div class="col-lg-3"><h4>CV:</h4></div>
+              <div class="col-lg-9">
+                <a class="btn btn-outline-success" [href]="myData.CV" target="_blank">Aperçu</a>
+              </div>
+            </div>
+            <p></p>
+            <div class="row">
+              <div class="col-lg-3"><h4>LM:</h4></div>
+              <div class="col-lg-9">
+                <a class="btn btn-outline-success" [href]="myData.LM" target="_blank">Aperçu</a>
+              </div>
+            </div>
+          </div>
+          <br>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6" *ngFor="let myDiplomes of myDataDiplome">
+            <div *ngIf="myDiplomes.status === 'false'">
+                <p></p><p></p>
+                <div class="card">
+                  <div class="card-header bg-info">
+                <h4 class="text-center text-white">Diplomes</h4>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-6"><h3>CIN Avant:</h3></div>
+                  <a class="btn btn-outline-success" [href]="myDiplomes.cinAvant" target="_blank">Aperçu</a>
+                </div>
+                <p></p>
+                <div class="row">
+                  <div class="col-lg-6"><h3>CIN Arriere:</h3></div>
+                  <a class="btn btn-outline-success" [href]="myDiplomes.cinArriere" target="_blank">Aperçu</a>
+                </div>
+                <p></p>
+                <div class="row">
+                  <div class="col-lg-6"><h3>Diplome 1:</h3></div>
+                  <a class="btn btn-outline-success" [href]="myDiplomes.diplome1" target="_blank">Aperçu</a>
+                </div>
+                <p></p>
+                <div class="row">
+                  <div class="col-lg-6"><h3>Diplome 2:</h3></div>
+                  <a class="btn btn-outline-success" [href]="myDiplomes.diplome2" target="_blank">Aperçu</a>
+                </div>
+              </div>
+              </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div *ngIf="myData.status === 'true'">
+                <p></p><p></p>
+                <div class="card">
+                  <div class="card-header bg-info">
+                <h4 class="text-center text-white">Information du compte</h4>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-4"><h3>Email:</h3></div>
+                  <div class="col-lg-8"><h4>{{myData.Email}}</h4></div>
+                </div>
+                <p></p>
+                <div class="row">
+                  <div class="col-lg-4"><h3>Password:</h3></div>
+                  <div class="col-lg-8"><h4>{{myData.Email}}123456</h4></div>
+                </div>
+              </div>
+              </div>
+              </div>
+        </div>
+      </div>
+      <p>Status: {{myData.status}}</p>
+      <div class="row">
+        <div class="col-lg-6">
+            <div class="row">
+              <div class="col-lg-4">
+            <button [disabled]="myData.status === 'true'" class="btn btn-success" style="width: 100%" (click)="onValidate()">Confirmer</button>
+              </div>
+               <!-- <div class="col-lg-4">
+            <button class="btn btn-danger" style="width: 100%">Refuser</button>
+                </div>
+                -->
+                  <div class="col-lg-4">
+            <button class="btn btn-dark" (click)="onBack()" style="width: 100%">Retour</button>
+                  </div>
+        </div>
+        </div>
+        <div class="col-lg-6"></div>
+
+      </div>
+    </div>
+  </div>
+</div>
